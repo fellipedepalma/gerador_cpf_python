@@ -61,12 +61,32 @@ def digito_verificador_1(base):
         dv1 = 0
     else:
         dv1 = 11 - resto1
+    
+    base.append(int(dv1))
+    print(base)
+
+    return base
 
 def digito_verificador_2(base):
-    
+    soma2 = (base[0] * 11) + (base[1] * 10) + (base[2] * 9) + (base[3] * 8) + (base[4] * 7) + (base[5] * 6) + (base[6] * 5) + (base[7] * 4) + (base[8] * 3) + (base[9] * 2)
+    resto2 = soma2 % 11
+
+    if resto2 < 2:
+        dv2 = 0
+    else:
+        dv2 = 11 - resto2
+
+    base.append(int(dv2))
+    # print(base)
+    return base
+
+
 
 
 
 
 gerador_base_8_digitos(base_8)
 escolha_9_digito(base_8)
+digito_verificador_1(base_8)
+digito_verificador_2(base_8)
+#print(base_8)
