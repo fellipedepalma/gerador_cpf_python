@@ -1,13 +1,5 @@
 import random
 
-
-#def validar_entrada_nono_digito(nono_digito):
-#    if not nono_digito.isInteger() or "Q":
-#
-#    if nono_digito < 0 or nono_digito > 9:
-#        print("Escolha um estado valido: ")
-
-
 estados = {
     0: 'RS', 
     1: 'DF, GO, MT, MS e TO',
@@ -19,7 +11,7 @@ estados = {
     7: 'RJ e ES',
     8: 'SP',
     9: 'PR e SC',
-    "Q": 'Qualquer'
+    "Q": 'QUALQUER'
 }
 
 base_8 = []
@@ -30,27 +22,32 @@ def gerador_base_8_digitos(base):
         base.append(n)
     print(base)
 
+def separador():
+    print("===========================")
+
 def mostrar_estados(uf):
-    print("===========================")
+    separador()
     print("Escolha um Estado abaixo: ")
-    print("===========================")
+    separador()
     
     for chave, valor in uf.items():
         print(f"{chave} -> {valor}")
     
-    print("===========================")
+    separador()
 
 
 def escolha_9_digito(base):
     mostrar_estados(estados)
 
+    separador()
     escolha_uf = input(f"Digito o número referente ao estado escolhido ou Q para gerar aleatoriamente:").strip().upper()
-
+    separador()
+    
     if escolha_uf == "Q":
         escolha_uf = random.randint(0,9)
 
     base.append(int(escolha_uf))    
-    print(base)
+    #print(base)
     return base
 
 def digito_verificador_1(base):
@@ -63,7 +60,7 @@ def digito_verificador_1(base):
         dv1 = 11 - resto1
     
     base.append(int(dv1))
-    print(base)
+    #print(base)
 
     return base
 
@@ -80,13 +77,25 @@ def digito_verificador_2(base):
     # print(base)
     return base
 
+def com_ou_sem_ponto(base):
 
+    cpf_puro = "".join(map(str,base))
+    
+    escolha_pontuacao = input(f"Você quer com ou sem pontuação, Digite S para sim e N para Não:").strip().upper()
+    
+    if escolha_pontuacao == "S":
+        bloco_1 = cpf_puro[0:3]
+        bloco_2 = cpf_puro[3:6]
+        bloco_3 = cpf_puro[6:9]
+        bloco_4 = cpf_puro[9:11]
 
-
-
+        cpf_formatado = f"{bloco_1}.{bloco_2}.{bloco_3}-{bloco_4}"
+        print(cpf_formatado)
+    else:
+        print(cpf_puro)
 
 gerador_base_8_digitos(base_8)
 escolha_9_digito(base_8)
 digito_verificador_1(base_8)
 digito_verificador_2(base_8)
-#print(base_8)
+com_ou_sem_ponto(base_8)
