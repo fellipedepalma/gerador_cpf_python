@@ -1,5 +1,13 @@
 import random
 
+
+#def validar_entrada_nono_digito(nono_digito):
+#    if not nono_digito.isInteger() or "Q":
+#
+#    if nono_digito < 0 or nono_digito > 9:
+#        print("Escolha um estado valido: ")
+
+
 estados = {
     0: 'RS', 
     1: 'DF, GO, MT, MS e TO',
@@ -23,29 +31,33 @@ def gerador_base_8_digitos(base):
     print(base)
 
 def mostrar_estados(uf):
-    for chave, valor in uf.items():
-        print(f"{chave} -> {valor}")
-
-#def validar_entrada_nono_digito(nono_digito):
-#    if not nono_digito.isInteger() or "Q":
-#
-#    if nono_digito < 0 or nono_digito > 9:
-#        print("Escolha um estado valido: ")
-
-def escolha_9_digito():
     print("===========================")
     print("Escolha um Estado abaixo: ")
     print("===========================")
-    mostrar_estados(estados)
+    
+    for chave, valor in uf.items():
+        print(f"{chave} -> {valor}")
+    
     print("===========================")
-    
-    escolha_uf = int(input(f"Digito o número referente ao estado escolhido ou Q para gerar aleatoriamente:"))
-    
+
+
+def escolha_9_digito(base):
+    mostrar_estados(estados)
+
+    escolha_uf = input(f"Digito o número referente ao estado escolhido ou Q para gerar aleatoriamente:").strip().upper()
+
     if escolha_uf == "Q":
         escolha_uf = random.randint(0,9)
-    
+
+    base.append(int(escolha_uf))    
+    print(base)
+    return base
+
+def digito_verificador_1(base):
+    soma1 = (base[0] * 10) + (base[1] * 9) + (base[2] * 8) + (base[3] * 7) + (base[4] * 6) + (base[5] * 5) + (base[6] * 4) + (base[7] * 3) + (base[8] * 2)
+    resto1 = soma1 % 11
 
 
 
 gerador_base_8_digitos(base_8)
-escolha_9_digito()
+escolha_9_digito(base_8)
