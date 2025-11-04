@@ -57,6 +57,15 @@ def digito_verificador_1(base):
     soma1 = (base[0] * 10) + (base[1] * 9) + (base[2] * 8) + (base[3] * 7) + (base[4] * 6) + (base[5] * 5) + (base[6] * 4) + (base[7] * 3) + (base[8] * 2)
     resto1 = soma1 % 11
 
+    if resto1 < 2:
+        dv1 = 0
+    else:
+        dv1 = 11 - resto1
+
+def digito_verificador_2(base):
+    
+
+
 
 
 gerador_base_8_digitos(base_8)
