@@ -60,16 +60,16 @@ A geração do CPF segue rigorosamente as regras definidas pela Receita Federal,
 
 | 9º Dígito | Região Fiscal |
 | :---: | :--- |
-| **0** | Rio Grande do Sul |
+| **0** | RS |
 | **1** | DF, GO, MT, MS, TO |
 | **2** | PA, AM, AC, AP, RO, RR |
-| **3** | Ceará, Maranhão e Piauí |
-| **4** | Pernambuco, RN, Paraíba, Alagoas |
-| **5** | Bahia e Sergipe |
-| **6** | Minas Gerais |
-| **7** | Rio de Janeiro e Espírito Santo |
-| **8** | São Paulo |
-| **9** | Paraná e Santa Catarina |
+| **3** | CE, MA e PI |
+| **4** | PE, RN, PB, AL |
+| **5** | BA e SE |
+| **6** | MG |
+| **7** | RJ e ES |
+| **8** | SP |
+| **9** | PR e SC |
 
 ---
 

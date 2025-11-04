@@ -1,6 +1,6 @@
 import random
 
-estados = {
+ESTADOS = {
     0: 'RS', 
     1: 'DF, GO, MT, MS e TO',
     2: 'PA, AM, AC, AP, RO e RR',
@@ -14,40 +14,38 @@ estados = {
     "Q": 'QUALQUER'
 }
 
+CPF_INVALIDOS = ["11111111111", "22222222222", "33333333333", "44444444444", "55555555555", "66666666666", "77777777777", "88888888888", "99999999999", "00000000000"]
+
 base_8 = []
 
 def gerador_base_8_digitos(base):
     for _ in range(8):
         n = random.randint(0,9)
         base.append(n)
-    print(base)
+    return(base)
 
 def separador():
     print("===========================")
 
 def mostrar_estados(uf):
     separador()
-    print("Escolha um Estado abaixo: ")
+    print("ESCOLHA UM ESTADO DA LISTA ABAIXO: ")
     separador()
     
     for chave, valor in uf.items():
         print(f"{chave} -> {valor}")
     
-    separador()
-
-
 def escolha_9_digito(base):
-    mostrar_estados(estados)
+    mostrar_estados(ESTADOS)
 
     separador()
-    escolha_uf = input(f"Digito o número referente ao estado escolhido ou Q para gerar aleatoriamente:").strip().upper()
+    escolha_uf = input(f"DIGITE O NÚMERO REFERENTE AO ESTADO ESCOLHIDO OU DIGITE Q PARA GERAR ALEATORIAMENTE: ").strip().upper()
     separador()
-    
+
     if escolha_uf == "Q":
         escolha_uf = random.randint(0,9)
 
     base.append(int(escolha_uf))    
-    #print(base)
     return base
 
 def digito_verificador_1(base):
@@ -60,8 +58,6 @@ def digito_verificador_1(base):
         dv1 = 11 - resto1
     
     base.append(int(dv1))
-    #print(base)
-
     return base
 
 def digito_verificador_2(base):
@@ -74,14 +70,17 @@ def digito_verificador_2(base):
         dv2 = 11 - resto2
 
     base.append(int(dv2))
-    # print(base)
     return base
 
-def com_ou_sem_ponto(base):
-
+def eh_invalido(base):
     cpf_puro = "".join(map(str,base))
-    
-    escolha_pontuacao = input(f"Você quer com ou sem pontuação, Digite S para sim e N para Não:").strip().upper()
+    if cpf_puro in CPF_INVALIDOS:
+        return True
+
+def com_ou_sem_ponto(base):
+    cpf_puro = "".join(map(str,base))
+    origem_estado = ESTADOS[base[8]]
+    escolha_pontuacao = input(f"VOCÊ QUER COM OU SEM PONTUAÇÃO, DIGITE 'S' PARA SIM E 'N' PARA NÃO: ").strip().upper()
     
     if escolha_pontuacao == "S":
         bloco_1 = cpf_puro[0:3]
@@ -90,12 +89,31 @@ def com_ou_sem_ponto(base):
         bloco_4 = cpf_puro[9:11]
 
         cpf_formatado = f"{bloco_1}.{bloco_2}.{bloco_3}-{bloco_4}"
-        print(cpf_formatado)
-    else:
-        print(cpf_puro)
 
-gerador_base_8_digitos(base_8)
-escolha_9_digito(base_8)
-digito_verificador_1(base_8)
-digito_verificador_2(base_8)
-com_ou_sem_ponto(base_8)
+        separador()
+        print(cpf_formatado)
+        print(f"CPF pertence ao Estado(s) de {origem_estado}")
+
+        separador()
+    else:
+        separador()
+        print(cpf_puro)
+        print(f"CPF pertence ao Estado(s) de {origem_estado}")
+        separador()
+
+
+def gerar_cpf():
+    print(f"### GERADOR DE CPF ###")
+
+    while True:
+        gerador_base_8_digitos(base_8)
+        escolha_9_digito(base_8)
+        digito_verificador_1(base_8)
+        digito_verificador_2(base_8)
+
+        if not eh_invalido(base_8):
+            break
+
+    com_ou_sem_ponto(base_8)
+
+gerar_cpf()
