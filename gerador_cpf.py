@@ -16,8 +16,6 @@ ESTADOS = {
 
 CPF_INVALIDOS = ["11111111111", "22222222222", "33333333333", "44444444444", "55555555555", "66666666666", "77777777777", "88888888888", "99999999999", "00000000000"]
 
-base_8 = []
-
 def gerador_base_8_digitos(base):
     for _ in range(8):
         n = random.randint(0,9)
@@ -25,7 +23,7 @@ def gerador_base_8_digitos(base):
     return(base)
 
 def separador():
-    print("===========================")
+    print("----------------------------------")
 
 def mostrar_estados(uf):
     separador()
@@ -39,8 +37,11 @@ def escolha_9_digito(base):
     mostrar_estados(ESTADOS)
 
     separador()
-    escolha_uf = input(f"DIGITE O NÚMERO REFERENTE AO ESTADO ESCOLHIDO OU DIGITE Q PARA GERAR ALEATORIAMENTE: ").strip().upper()
+    print()
+    escolha_uf = input(f"DIGITE O NÚMERO REFERENTE AO \nESTADO ESCOLHIDO OU DIGITE 'Q' \nPARA GERAR ALEATORIAMENTE: ").strip().upper()
+    print()
     separador()
+    print()
 
     if escolha_uf == "Q":
         escolha_uf = random.randint(0,9)
@@ -80,7 +81,8 @@ def eh_invalido(base):
 def com_ou_sem_ponto(base):
     cpf_puro = "".join(map(str,base))
     origem_estado = ESTADOS[base[8]]
-    escolha_pontuacao = input(f"VOCÊ QUER COM OU SEM PONTUAÇÃO, DIGITE 'S' PARA SIM E 'N' PARA NÃO: ").strip().upper()
+    escolha_pontuacao = input(f"VOCÊ QUER COM OU SEM PONTUAÇÃO, \nDIGITE 'S' PARA SIM OU 'N' PARA NÃO: ").strip().upper()
+    print()
     
     if escolha_pontuacao == "S":
         bloco_1 = cpf_puro[0:3]
@@ -91,19 +93,28 @@ def com_ou_sem_ponto(base):
         cpf_formatado = f"{bloco_1}.{bloco_2}.{bloco_3}-{bloco_4}"
 
         separador()
+        print()
         print(cpf_formatado)
         print(f"CPF pertence ao Estado(s) de {origem_estado}")
+        print()
 
         separador()
     else:
         separador()
+        print()
         print(cpf_puro)
         print(f"CPF pertence ao Estado(s) de {origem_estado}")
+        print()
         separador()
 
 
 def gerar_cpf():
-    print(f"### GERADOR DE CPF ###")
+    base_8 = []
+    print()
+    print("==================================")
+    print(f"          GERADOR DE CPF         ")
+    print("==================================")
+    print()
 
     while True:
         gerador_base_8_digitos(base_8)
