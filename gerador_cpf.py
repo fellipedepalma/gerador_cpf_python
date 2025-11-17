@@ -1,4 +1,5 @@
 import random
+import os
 
 ESTADOS = {
     0: 'RS', 
@@ -36,12 +37,20 @@ def mostrar_estados(uf):
         print(f"{chave} -> {valor}")
     
 
+def limpar_tela():
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')     
+
+
 def escolha_9_digito(base):
     mostrar_estados(ESTADOS)
 
     separador()
     print()
-    escolha_uf = input(f"Digite o número referentea ao estado \n escolhido ou 'Q' para gerar aleatóriamente: ").strip().upper()
+    escolha_uf = input(f"Digite o número referente ao estado \n escolhido ou 'Q' para gerar aleatóriamente: ").strip().upper()
+    limpar_tela()
     print()
     separador()
     print()
@@ -93,20 +102,6 @@ def digito_verificador_2(base):
     return base
 
 
-
-
-#def digito_verificador_2(base):
-#    soma2 = (base[0] * 11) + (base[1] * 10) + (base[2] * 9) + (base[3] * 8) + (base[4] * 7) + (base[5] * 6) + (base[6] * 5) + (base[7] * 4) + (base[8] * 3) + (base[9] * 2)
-#    resto2 = soma2 % 11
-
-#    if resto2 < 2:
-#        dv2 = 0
-#    else:
-#        dv2 = 11 - resto2
-
-#   base.append(int(dv2))
-#    return base
-
 def eh_invalido(base):
     cpf_puro = "".join(map(str,base))
     if cpf_puro in CPF_INVALIDOS:
@@ -116,6 +111,7 @@ def com_ou_sem_ponto(base):
     cpf_puro = "".join(map(str,base))
     origem_estado = ESTADOS[base[8]]
     escolha_pontuacao = input(f"VOCÊ QUER COM OU SEM PONTUAÇÃO, \nDIGITE 'S' PARA SIM OU 'N' PARA NÃO: ").strip().upper()
+    limpar_tela()
     print()
     
     if escolha_pontuacao == "S":
@@ -127,6 +123,8 @@ def com_ou_sem_ponto(base):
         cpf_formatado = f"{bloco_1}.{bloco_2}.{bloco_3}-{bloco_4}"
 
         separador()
+        print('      CPF GERADO COM SUCESSO     ')
+        separador()
         print()
         print(cpf_formatado)
         print(f"CPF pertence ao Estado(s) de {origem_estado}")
@@ -134,6 +132,8 @@ def com_ou_sem_ponto(base):
 
         separador()
     else:
+        separador()
+        print('      CPF GERADO COM SUCESSO     ')
         separador()
         print()
         print(cpf_puro)
@@ -143,6 +143,7 @@ def com_ou_sem_ponto(base):
 
 
 def gerar_cpf():
+    limpar_tela()
     base_8 = []
     print()
     print("==================================")
