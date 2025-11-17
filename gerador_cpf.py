@@ -22,8 +22,10 @@ def gerador_base_8_digitos(base):
         base.append(n)
     return(base)
 
+
 def separador():
     print("----------------------------------")
+
 
 def mostrar_estados(uf):
     separador()
@@ -33,12 +35,13 @@ def mostrar_estados(uf):
     for chave, valor in uf.items():
         print(f"{chave} -> {valor}")
     
+
 def escolha_9_digito(base):
     mostrar_estados(ESTADOS)
 
     separador()
     print()
-    escolha_uf = input(f"DIGITE O NÚMERO REFERENTE AO \nESTADO ESCOLHIDO OU DIGITE 'Q' \nPARA GERAR ALEATORIAMENTE: ").strip().upper()
+    escolha_uf = input(f"Digite o número referentea ao estado \n escolhido ou 'Q' para gerar aleatóriamente: ").strip().upper()
     print()
     separador()
     print()
@@ -50,20 +53,35 @@ def escolha_9_digito(base):
     return base
 
 def digito_verificador_1(base):
-    soma1 = (base[0] * 10) + (base[1] * 9) + (base[2] * 8) + (base[3] * 7) + (base[4] * 6) + (base[5] * 5) + (base[6] * 4) + (base[7] * 3) + (base[8] * 2)
+    soma1 = 0
+    peso = 10
+
+    for digito in base:
+        soma1 += digito * peso
+        peso -= peso
+
     resto1 = soma1 % 11
 
     if resto1 < 2:
         dv1 = 0
     else:
         dv1 = 11 - resto1
-    
+
     base.append(int(dv1))
-    return base
+
+    return base    
+
+
 
 def digito_verificador_2(base):
-    soma2 = (base[0] * 11) + (base[1] * 10) + (base[2] * 9) + (base[3] * 8) + (base[4] * 7) + (base[5] * 6) + (base[6] * 5) + (base[7] * 4) + (base[8] * 3) + (base[9] * 2)
-    resto2 = soma2 % 11
+    soma2 = 0
+    peso  = 11
+
+    for digito in base:
+        soma2 += soma2 * peso
+        peso -= peso
+
+        resto2 = soma2 % 11
 
     if resto2 < 2:
         dv2 = 0
@@ -71,7 +89,23 @@ def digito_verificador_2(base):
         dv2 = 11 - resto2
 
     base.append(int(dv2))
+
     return base
+
+
+
+
+#def digito_verificador_2(base):
+#    soma2 = (base[0] * 11) + (base[1] * 10) + (base[2] * 9) + (base[3] * 8) + (base[4] * 7) + (base[5] * 6) + (base[6] * 5) + (base[7] * 4) + (base[8] * 3) + (base[9] * 2)
+#    resto2 = soma2 % 11
+
+#    if resto2 < 2:
+#        dv2 = 0
+#    else:
+#        dv2 = 11 - resto2
+
+#   base.append(int(dv2))
+#    return base
 
 def eh_invalido(base):
     cpf_puro = "".join(map(str,base))
