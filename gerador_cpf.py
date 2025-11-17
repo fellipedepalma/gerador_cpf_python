@@ -3,15 +3,15 @@ import os
 
 ESTADOS = {
     0: 'RS', 
-    1: 'DF, GO, MT, MS e TO',
-    2: 'PA, AM, AC, AP, RO e RR',
-    3: 'CE, MA e PI',
-    4: 'PE, RN, PB e AL',
-    5: 'BA e SE',
+    1: 'DF, GO, MT, MS ou TO',
+    2: 'PA, AM, AC, AP, RO ou RR',
+    3: 'CE, MA ou PI',
+    4: 'PE, RN, PB ou AL',
+    5: 'BA ou SE',
     6: 'MG',
-    7: 'RJ e ES',
+    7: 'RJ ou ES',
     8: 'SP',
-    9: 'PR e SC',
+    9: 'PR ou SC',
     "Q": 'QUALQUER'
 }
 
@@ -67,7 +67,7 @@ def digito_verificador_1(base):
 
     for digito in base:
         soma1 += digito * peso
-        peso -= peso
+        peso = peso - 1
 
     resto1 = soma1 % 11
 
@@ -87,8 +87,8 @@ def digito_verificador_2(base):
     peso  = 11
 
     for digito in base:
-        soma2 += soma2 * peso
-        peso -= peso
+        soma2 = soma2 + (digito * peso)
+        peso = peso - 1
 
         resto2 = soma2 % 11
 
@@ -106,6 +106,13 @@ def eh_invalido(base):
     cpf_puro = "".join(map(str,base))
     if cpf_puro in CPF_INVALIDOS:
         return True
+
+def validar_entrada_estado(input_usuario):
+    if input_usuario in range(0, 9) or 'Q':
+        return input_usuario
+    else:
+        print('>> Digite o número do estado correspondente <<')
+        return False
 
 def com_ou_sem_ponto(base):
     cpf_puro = "".join(map(str,base))
@@ -144,7 +151,7 @@ def com_ou_sem_ponto(base):
 
 def gerar_cpf():
     limpar_tela()
-    base_8 = []
+
     print()
     print("==================================")
     print(f"          GERADOR DE CPF         ")
@@ -152,8 +159,11 @@ def gerar_cpf():
     print()
 
     while True:
+        base_8 = []
         gerador_base_8_digitos(base_8)
+        
         escolha_9_digito(base_8)
+
         digito_verificador_1(base_8)
         digito_verificador_2(base_8)
 
